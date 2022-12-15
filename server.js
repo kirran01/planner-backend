@@ -3,14 +3,19 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
+//declare routes
+const authRouter = require("./routes/auth.routes");
 
 const app = express();
 const PORT = process.env.PORT;
 app.use(express.json());
 
+//use routes
+app.use("/auth", authRouter);
+
 app.get("/", (req, res) => {
-    res.send("server up");
-  });
+  res.send("server up");
+});
 
 mongoose
   .connect(process.env.MONGODB_URI)
