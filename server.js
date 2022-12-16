@@ -5,6 +5,7 @@ const cors = require("cors");
 
 //declare routes
 const authRouter = require("./routes/auth.routes");
+const dayRouter = require("./routes/day.routes");
 
 const app = express();
 const PORT = process.env.PORT;
@@ -12,7 +13,9 @@ app.use(express.json());
 
 //use routes
 app.use("/auth", authRouter);
+app.use("/days", dayRouter);
 
+//the initial get to test express
 app.get("/", (req, res) => {
   res.send("server up");
 });

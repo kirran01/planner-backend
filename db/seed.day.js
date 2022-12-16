@@ -21,6 +21,7 @@ mongoose
       events: createdEvent._id,
     });
   })
+  //?
   .then((createdDay) => {
     console.log("created Day--->", createdDay);
     return Day.findByIdAndUpdate(createdDay.events, {
