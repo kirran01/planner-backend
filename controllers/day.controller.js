@@ -1,4 +1,5 @@
 const Day = require("../models/Day.model");
+const Event = require("../models/Event.model");
 
 const getAllDaysController = (req, res) => {
   Day.find()
@@ -11,7 +12,30 @@ const getAllDaysController = (req, res) => {
 };
 
 const getDayByIdController = (req, res) => {
-  res.send(`day id route hit :) and id is ${req.params.id} `);
+  Day.findById(req.params.id)
+    .populate("myEvents")
+    .then((foundDay) => {
+      res.send(foundDay);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
 };
 
-module.exports = { getAllDaysController, getDayByIdController };
+const createDayController = (req, res) => {
+  Day.create({
+    day: Date.now(),
+  })
+    .then((createdDay) => {
+      res.send(createdDay);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+module.exports = {
+  getAllDaysController,
+  getDayByIdController,
+  createDayController,
+};

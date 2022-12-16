@@ -6,6 +6,7 @@ const eventSchema = new Schema({
   eventUrl: String,
   imageUrl: String,
   userEntry: String,
+  dayId: { type: Schema.Types.ObjectId, ref: 'Day' }
 });
 
 const Event = mongoose.model("Event", eventSchema);
