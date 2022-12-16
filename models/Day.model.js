@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 
 const daySchema = new Schema({
   day: Date,
-  myEvents: [{ type: Schema.Types.ObjectId, ref: "Event" }]
+  quote: String,
+  myEvents: [{ type: Schema.Types.ObjectId, ref: "Event" }],
 });
 
 const Day = mongoose.model("Day", daySchema);

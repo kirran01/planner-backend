@@ -9,6 +9,7 @@ mongoose
     console.log("connected to -->", connectionRes.connections[0].name);
     return Day.create({
       day: Date.now(),
+      quote:"peace be with you"
     });
   })
   .then((createdDay) => {
@@ -28,7 +29,7 @@ mongoose
       createdEvent.dayId,
       {
         $push: {
-          events: createdEvent._id,
+          myEvents: createdEvent._id,
         },
       },
       { new: true }

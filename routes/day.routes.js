@@ -12,4 +12,7 @@ router.get("/all/:id", getDayByIdController);
 
 router.post("/create-day", createDayController);
 
+router.put("/all/:id",(req,res)=>{
+})
+
 module.exports = router;
