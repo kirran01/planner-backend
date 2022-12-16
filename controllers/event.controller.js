@@ -1,6 +1,22 @@
 const Event = require("../models/Event.model");
 const Day = require("../models/Day.model");
 
+const createEventController = (req, res) => {
+  //   res.send("post route hit for event");
+  Event.create({
+    name: req.body.name,
+    eventUrl: req.body.eventUrl,
+    imageUrl: req.body.imageUrl,
+    userEntry: req.body.userEntry,
+  })
+    .then((createdEvent) => {
+      res.send(createdEvent);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+};
+
 const getAllEventsController = (req, res) => {
   Event.find()
     .then((foundEvents) => {
@@ -41,8 +57,14 @@ const updateEventController = (req, res) => {
     });
 };
 
+const deleteEventController = (req, res) => {
+  res.send(`delete route for event hit @ ${req.params.id}`);
+};
+
 module.exports = {
   getAllEventsController,
   getEventByIdController,
   updateEventController,
+  deleteEventController,
+  createEventController,
 };
