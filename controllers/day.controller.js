@@ -35,8 +35,19 @@ const createDayController = (req, res) => {
     });
 };
 
+const deleteDayController = (req, res) => {
+  Day.findByIdAndDelete(req.params.id)
+    .then((deletedDay) => {
+      res.send(deletedDay);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+};
+
 module.exports = {
   getAllDaysController,
   getDayByIdController,
   createDayController,
+  deleteDayController,
 };
