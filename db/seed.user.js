@@ -7,9 +7,9 @@ mongoose
   .then((mongooseRes) => {
     console.log("connected to -->", mongooseRes.connections[0].name);
     return User.create({
-      email: "user3",
-      name: "user3",
-      password: "user3",
+      email: "from user seed",
+      name: "from user seed",
+      password: "from user seed",
     });
   })
   .then((createdUser) => {

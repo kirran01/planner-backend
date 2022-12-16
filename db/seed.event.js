@@ -7,10 +7,10 @@ mongoose
   .then((mongooseRes) => {
     console.log("connected to -->", mongooseRes.connections[0].name);
     return Event.create({
-      name: "event",
-      imageUrl: "event",
-      eventUrl: "event",
-      userEntry: "event",
+      name: "from event seed",
+      imageUrl: "from event seed",
+      eventUrl: "from event seed",
+      userEntry: "from event seed",
     });
   })
   .then((createdEvent) => {

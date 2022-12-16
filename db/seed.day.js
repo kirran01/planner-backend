@@ -9,7 +9,7 @@ mongoose
     console.log("connected to -->", connectionRes.connections[0].name);
     return Day.create({
       day: Date.now(),
-      quote:"peace be with you"
+      quote:"from day seed"
     });
   })
   .then((createdDay) => {

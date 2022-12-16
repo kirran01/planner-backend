@@ -58,7 +58,25 @@ const updateEventController = (req, res) => {
 };
 
 const deleteEventController = (req, res) => {
-  res.send(`delete route for event hit @ ${req.params.id}`);
+  Event.findOneAndDelete(req.params.id)
+    .then((deletedEvent) => {
+      return Day.findByIdAndUpdate(
+        deletedEvent.dayId,
+        {
+          $pull: {
+            myEvents: deletedEvent._id,
+          },
+        },
+        { new: true }
+      );
+    })
+    .then((updatedDay) => {
+      res.send(updatedDay);
+    })
+
+    .catch((err) => {
+      res.send(err);
+    });
 };
 
 module.exports = {
