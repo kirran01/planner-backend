@@ -9,7 +9,7 @@ mongoose
     console.log("connected to -->", connectionRes.connections[0].name);
     return Day.create({
       day: Date.now(),
-      quote:"from day seed"
+      quote: "from day seed",
     });
   })
   .then((createdDay) => {
@@ -23,7 +23,6 @@ mongoose
       dayId: createdDay._id,
     });
   })
-  //?
   .then((createdEvent) => {
     return Day.findByIdAndUpdate(
       createdEvent.dayId,

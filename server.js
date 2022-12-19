@@ -12,6 +12,14 @@ const app = express();
 const PORT = process.env.PORT;
 app.use(express.json());
 
+//enable cors
+app.use(
+  cors({
+    origin: "*",
+  })
+);
+
+
 //use routes
 app.use("/auth", authRouter);
 app.use("/days", dayRouter);

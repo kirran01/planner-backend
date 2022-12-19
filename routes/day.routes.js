@@ -8,11 +8,8 @@ const {
 } = require("../controllers/day.controller");
 
 router.get("/all", getAllDaysController);
-
 router.get("/all/:id", getDayByIdController);
-
 router.post("/create-day", createDayController);
-
 router.delete("/all/:id", deleteDayController);
 
 module.exports = router;
