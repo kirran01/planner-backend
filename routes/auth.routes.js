@@ -8,8 +8,9 @@ const { isAuthenticated } = require("../middleware/jwt.middleware");
 
 router.post("/login", loginController);
 router.post("/signup", signupController);
-router.get("/verify", isAuthenticated, (req, res) => {
-  console.log(req.payload);
+router.get("/verify", 
+isAuthenticated, 
+(req, res) => {
   res.status(200).json(req.payload);
 });
 

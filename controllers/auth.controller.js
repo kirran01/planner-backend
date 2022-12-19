@@ -32,7 +32,7 @@ const loginController = (req, res) => {
         name: myUser.name,
         email: myUser.email,
       };
-      console.log(payload);
+      console.log("This is the payload --->", payload);
       const authToken = jwt.sign(payload, process.env.TOKEN_SECRET, {
         algorithm: "HS256",
         expiresIn: "72h",
