@@ -50,7 +50,10 @@ const updateDayController = (req, res) => {
   Day.findByIdAndUpdate(
     req.params.id,
     {
+      customDay:req.body.customDay,
       quote: req.body.quote,
+      myEvents:req.body.event
+
     },
     { new: true }
   )

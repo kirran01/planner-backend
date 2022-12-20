@@ -2,15 +2,40 @@ const Event = require("../models/Event.model");
 const Day = require("../models/Day.model");
 
 const createEventController = (req, res) => {
-  //   res.send("post route hit for event");
-  Event.create({
-    name: req.body.name,
-    eventUrl: req.body.eventUrl,
-    imageUrl: req.body.imageUrl,
-    userEntry: req.body.userEntry,
+  Day.findOne({
+    day: req.body.day,
   })
+    .then((foundDay) => {
+      if (!foundDay) {
+        return Day.create({
+          day: Date.now(),
+          quote: "testing @ 1105",
+        });
+      }
+      return foundDay;
+    })
+    .then((createdOrFoundDay) => {
+      return Event.create({
+        name: req.body.name,
+        eventUrl: req.body.eventUrl,
+        imageUrl: req.body.imageUrl,
+        userEntry: req.body.userEntry,
+        dayId: createdOrFoundDay._id,
+      });
+    })
     .then((createdEvent) => {
-      res.send(createdEvent);
+      return Day.findByIdAndUpdate(
+        createdEvent.dayId,
+        {
+          $push: {
+            myEvents: createdEvent._id,
+          },
+        },
+        { new: true }
+      );
+    })
+    .then((updatedDay) => {
+      res.send(updatedDay);
     })
     .catch((err) => {
       res.send(err);
