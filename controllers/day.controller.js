@@ -45,9 +45,27 @@ const deleteDayController = (req, res) => {
     });
 };
 
+const updateDayController = (req, res) => {
+  // res.send("day put route hit");
+  Day.findByIdAndUpdate(
+    req.params.id,
+    {
+      quote: req.body.quote,
+    },
+    { new: true }
+  )
+    .then((updatedDay) => {
+      res.send(updatedDay);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+};
+
 module.exports = {
   getAllDaysController,
   getDayByIdController,
   createDayController,
   deleteDayController,
+  updateDayController,
 };
