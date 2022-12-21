@@ -53,11 +53,10 @@ const deleteDayController = (req, res) => {
 };
 
 const updateDayController = (req, res) => {
-  // res.send("day put route hit");
   Day.findByIdAndUpdate(
     req.params.id,
     {
-      customDay:req.body.customDay,
+      day:req.body.day,
       quote: req.body.quote,
       myEvents:req.body.event
 
