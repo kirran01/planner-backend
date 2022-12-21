@@ -39,7 +39,15 @@ const createDayController = (req, res) => {
 const deleteDayController = (req, res) => {
   Day.findByIdAndDelete(req.params.id)
     .then((deletedDay) => {
-      res.send(deletedDay);
+    const query={dayId:deletedDay._id}
+    return Event.deleteMany(query)
+    .then(deletedEvents=>{
+      console.log(deletedEvents,"<-- foundEvents")
+      return deletedDay
+    })
+    })
+    .then(deletedDay=>{
+      console.log(deletedDay,"<--deletedDay")
     })
     .catch((err) => {
       res.send(err);
