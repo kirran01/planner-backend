@@ -2,13 +2,11 @@ const Event = require("../models/Event.model");
 const Day = require("../models/Day.model");
 
 const createEventController = (req, res) => {
-  console.log(req.body, "<-----");
   Day.findById(req.body.dayId)
     .then((foundDay) => {
       if (!foundDay) {
         return Day.create({
           day: Date.now(),
-          quote: "testing @ 715",
         });
       }
       return foundDay;
