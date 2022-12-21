@@ -3,6 +3,7 @@ const Event = require("../models/Event.model");
 
 const getAllDaysController = (req, res) => {
   Day.find()
+  .populate('myEvents')
     .then((allDays) => {
       res.send(allDays);
     })

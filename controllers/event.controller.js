@@ -2,14 +2,13 @@ const Event = require("../models/Event.model");
 const Day = require("../models/Day.model");
 
 const createEventController = (req, res) => {
-  Day.findOne({
-    day: req.body.day,
-  })
+  console.log(req.body, "<-----");
+  Day.findById(req.body.dayId)
     .then((foundDay) => {
       if (!foundDay) {
         return Day.create({
           day: Date.now(),
-          quote: "testing @ 1105",
+          quote: "testing @ 715",
         });
       }
       return foundDay;
@@ -32,10 +31,12 @@ const createEventController = (req, res) => {
           },
         },
         { new: true }
-      );
+      ).then((updatedDay) => {
+        return createdEvent;
+      });
     })
-    .then((updatedDay) => {
-      res.send(updatedDay);
+    .then((createdEvent) => {
+      res.send(createdEvent);
     })
     .catch((err) => {
       res.send(err);
