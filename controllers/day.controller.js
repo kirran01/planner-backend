@@ -42,12 +42,10 @@ const deleteDayController = (req, res) => {
     const query={dayId:deletedDay._id}
     return Event.deleteMany(query)
     .then(deletedEvents=>{
-      console.log(deletedEvents,"<-- foundEvents")
       return deletedDay
     })
     })
     .then(deletedDay=>{
-      console.log(deletedDay,"<--deletedDay")
     })
     .catch((err) => {
       res.send(err);

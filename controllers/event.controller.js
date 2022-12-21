@@ -82,7 +82,7 @@ const updateEventController = (req, res) => {
 };
 
 const deleteEventController = (req, res) => {
-  Event.findOneAndDelete(req.params.id)
+  Event.findByIdAndDelete(req.params.id)
     .then((deletedEvent) => {
       return Day.findByIdAndUpdate(
         deletedEvent.dayId,
