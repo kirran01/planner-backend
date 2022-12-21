@@ -7,6 +7,7 @@ const createEventController = (req, res) => {
       if (!foundDay) {
         return Day.create({
           day: Date.now(),
+          owner:req.payload._id
         });
       }
       return foundDay;
@@ -18,6 +19,7 @@ const createEventController = (req, res) => {
         imageUrl: req.body.imageUrl,
         userEntry: req.body.userEntry,
         dayId: createdOrFoundDay._id,
+        owner:req.payload._id
       });
     })
     .then((createdEvent) => {

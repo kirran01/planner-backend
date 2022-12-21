@@ -6,7 +6,8 @@ const eventSchema = new Schema({
   eventUrl: String,
   imageUrl: String,
   userEntry: String,
-  dayId: { type: Schema.Types.ObjectId, ref: 'Day' }
+  dayId: { type: Schema.Types.ObjectId, ref: 'Day' },
+  owner:{ type: Schema.Types.ObjectId, ref: 'User' }
 });
 
 const Event = mongoose.model("Event", eventSchema);

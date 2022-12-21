@@ -8,8 +8,9 @@ const {
   updateEventController,
   deleteEventController,
 } = require("../controllers/event.controller");
+const{isAuthenticated}=require('../middleware/jwt.middleware')
 
-router.post("/create-event", createEventController);
+router.post("/create-event",isAuthenticated, createEventController);
 router.get("/all", getAllEventsController);
 router.get("/all/:id", getEventByIdController);
 router.put("/all/:id", updateEventController);

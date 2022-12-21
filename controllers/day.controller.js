@@ -27,6 +27,7 @@ const createDayController = (req, res) => {
   Day.create({
     day: Date.now(),
     quote: req.body.quote,
+    owner:req.payload._id
   })
     .then((createdDay) => {
       res.send(createdDay);
