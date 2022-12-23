@@ -10,14 +10,17 @@ const eventRouter = require("./routes/event.routes");
 
 const app = express();
 const PORT = process.env.PORT;
-app.use(express.json());
+
 
 //enable cors
 app.use(
-  cors({
-    origin: "*",
-  })
+  cors()
 );
+
+
+app.use(express.json());
+
+
 
 
 //use routes
