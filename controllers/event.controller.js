@@ -31,12 +31,10 @@ const createEventController = (req, res) => {
           },
         },
         { new: true }
-      ).then((updatedDay) => {
-        return createdEvent;
-      });
+      ).populate("myEvents");
     })
-    .then((createdEvent) => {
-      res.send(createdEvent);
+    .then((updatedEvent) => {
+      res.send(updatedEvent);
     })
     .catch((err) => {
       res.send(err);

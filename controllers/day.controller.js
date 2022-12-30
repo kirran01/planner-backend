@@ -25,7 +25,7 @@ const getDayByIdController = (req, res) => {
 
 const createDayController = (req, res) => {
   Day.create({
-    day: Date.now(),
+    day: new Date(req.body.day),
     quote: req.body.quote,
     owner:req.payload._id
   })
