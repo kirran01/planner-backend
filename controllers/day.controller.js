@@ -3,7 +3,7 @@ const Event = require("../models/Event.model");
 
 const getAllDaysController = (req, res) => {
   Day.find()
-  .populate('myEvents')
+    .populate("myEvents")
     .then((allDays) => {
       res.send(allDays);
     })
@@ -27,7 +27,7 @@ const createDayController = (req, res) => {
   Day.create({
     day: new Date(req.body.day),
     quote: req.body.quote,
-    owner:req.payload._id
+    owner: req.payload._id,
   })
     .then((createdDay) => {
       res.send(createdDay);
@@ -40,13 +40,10 @@ const createDayController = (req, res) => {
 const deleteDayController = (req, res) => {
   Day.findByIdAndDelete(req.params.id)
     .then((deletedDay) => {
-    const query={dayId:deletedDay._id}
-    return Event.deleteMany(query)
-    .then(deletedEvents=>{
-      return deletedDay
-    })
-    })
-    .then(deletedDay=>{
+      const query = { dayId: req.params.id };
+      return Event.deleteMany(query).then((deletedEvents) => {
+        res.send("successfully deleted");
+      });
     })
     .catch((err) => {
       res.send(err);
@@ -57,10 +54,9 @@ const updateDayController = (req, res) => {
   Day.findByIdAndUpdate(
     req.params.id,
     {
-      day:req.body.day,
+      day: req.body.day,
       quote: req.body.quote,
-      myEvents:req.body.event
-
+      myEvents: req.body.event,
     },
     { new: true }
   )
