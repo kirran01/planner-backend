@@ -11,7 +11,7 @@ const loginController = (req, res) => {
       },
     });
   }
-  let myUser;
+  let updatedUser;
   User.findOne({
     email,
   })
@@ -19,7 +19,7 @@ const loginController = (req, res) => {
       if (!foundUser) {
         return Promise.reject("invalid email or password");
       }
-      myUser = foundUser;
+      updatedUser = foundUser;
       console.log(foundUser);
       return bcryptjs.compare(password, foundUser.password);
     })
@@ -28,9 +28,9 @@ const loginController = (req, res) => {
         return Promise.reject("invalid email or password");
       }
       const payload = {
-        _id: myUser._id,
-        name: myUser.name,
-        email: myUser.email,
+        _id: updatedUser._id,
+        name: updatedUser.name,
+        email: updatedUser.email,
       };
       console.log("This is the payload --->", payload);
       const authToken = jwt.sign(payload, process.env.TOKEN_SECRET, {
@@ -71,4 +71,25 @@ const signupController = (req, res) => {
   });
 };
 
-module.exports = { loginController, signupController };
+const editUserController = (req, res) => {
+  User.findByIdAndUpdate(req.payload._id, req.body, { new: true })
+    .then((updatedUser) => {
+      console.log(req.payload._id, req.body);
+      const payload = {
+        _id: updatedUser._id,
+        name: updatedUser.name,
+        email: updatedUser.email,
+      };
+      console.log("This is the payload --->", payload);
+      const authToken = jwt.sign(payload, process.env.TOKEN_SECRET, {
+        algorithm: "HS256",
+        expiresIn: "72h",
+      });
+      res.send({ updatedUser: updatedUser, updatedToken: authToken });
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+};
+
+module.exports = { loginController, signupController, editUserController };

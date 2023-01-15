@@ -21,8 +21,6 @@ app.use(
 app.use(express.json());
 
 
-
-
 //use routes
 app.use("/auth", authRouter);
 app.use("/days", dayRouter);
